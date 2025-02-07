@@ -21,13 +21,15 @@ tasks:
   - id: dbt-build
     type: io.kestra.plugin.dbt.cli.DbtCLI
     env:
-      DBT_DATABASE: postgres-zoomcamp
+      DBT_DATABASE: kestra
       DBT_SCHEMA: public
     namespaceFiles:
       enabled: true
     containerImage: ghcr.io/kestra-io/dbt-postgres:latest
     taskRunner:
       type: io.kestra.plugin.scripts.runner.docker.Docker
+      #extraHosts:
+      #  - "host.docker.internal:host-gateway"
     commands:
       - dbt deps
       - "{{ inputs.dbt_command }}"
@@ -43,7 +45,7 @@ tasks:
             user: kestra
             password: k3str4
             port: 5432
-            dbname: postgres-zoomcamp
+            dbname: kestra
             schema: public
             threads: 8
             connect_timeout: 10
@@ -54,6 +56,6 @@ description: |
   ```yaml
   sources:
     - name: staging
-      database: postgres-zoomcamp
+      database: kestra
       schema: public
   ```
