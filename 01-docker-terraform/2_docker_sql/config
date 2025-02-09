@@ -1,0 +1,5 @@
+# Read more about SSH config files: https://linux.die.net/man/5/ssh_config
+Host de-zoomcamp
+    HostName 104.199.130.206
+    User harry
+    IdentityFile C:\Users\harry\.ssh\id_rsa
